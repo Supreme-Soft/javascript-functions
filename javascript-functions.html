@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Functions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #ff4081;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header {
+            margin-left: 10px;
+        }
+
+        .visit-us {
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .visit-us {
+                margin-right: 48px;
+            }
+
+            header h1 {
+                margin: 0;
+                font-size: 18px;
+            }
+        }
+
+        nav {
+            background-color: #ff4081;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #222;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-icon {
+                display: block;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 999;
+            }
+
+            nav {
+                margin-top: 45px;
+            }
+
+            nav a {
+                display: none;
+                margin: 10px 0;
+            }
+
+            nav a:not(:first-child) {
+                border-top: 1px solid rgba(255, 255, 255, 0.5);
+                padding-top: 10px;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            header {
+                position: relative;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+            }
+
+            nav a {
+                display: block;
+                margin: 0 15px;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            min-height: 75vh;
+            background-color: #ff40812e;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .image-container {
+            flex: 0 0 auto;
+            width: 50%;
+            max-width: 100%;
+            height: 300px;
+            text-align: left;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #f7d5e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .image-container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+            user-select: none;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .icon:hover {
+            color: #222;
+        }
+
+        .next-icon {
+            bottom: 10px;
+            top: auto;
+            left: auto;
+        }
+
+        .details-container {
+            flex: 0 0 auto;
+            width: 50%;
+            max-width: 100%;
+            padding: 20px;
+            background-color: #2f547b;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .details {
+            font-size: 22px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            background-color: #ff4081;
+            color: #ffffff;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #ffffff;
+            color: #ff4081;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .image-container,
+            .details-container {
+                width: 100%;
+                border-radius: 0px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            color: #fff;
+            background-color: black;
+            padding: 50px 10px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: #ff4081;
+            text-decoration: none;
+            margin: 0 5px;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-link:hover {
+            color: #ff4081;
+            border-bottom-color: #ff4081;
+            cursor: pointer;
+        }
+
+        .icon-link {
+
+            text-decoration: none;
+        }
+
+        .playstore-icon {
+            color: #34a853;
+        }
+
+        .youtube-icon {
+            color: #ff0000;
+        }
+
+        .github-icon {
+            color: #1f2328;
+        }
+
+        .icon-container {
+            padding: 3px;
+            background-color: #f5f5f5;
+            display: inline-block;
+            border-radius: 8px;
+        }
+
+        ul.credit-links {
+            list-style-type: circle;
+        }
+
+        ul.credit-links li {
+            margin-bottom: 5px;
+        }
+
+        ul.credit-links li {
+            font-size: 14px;
+        }
+
+        .credits {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header">
+            <h1>JavaScript Functions</h1>
+            <i class="fas fa-bars menu-icon" id="menuToggler" onclick="toggleMenu()"></i>
+            <i class="fas fa-times menu-icon" id="closeToggler" style="display: none;" onclick="toggleMenu()"></i>
+        </div>
+        <div class="visit-us"> <span>
+                <span class="icon-container">
+                    <a href="https://play.google.com/store/apps/developer?id=Supreme+Soft"
+                        class="icon-link playstore-icon" target="_blank">
+                        <i class="fab fa-google-play"></i>
+                    </a>
+                </span>
+
+                <span class="icon-container">
+                    <a href="https://www.youtube.com/@supreme-soft" class="icon-link youtube-icon" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </span>
+                <span class="icon-container">
+                    <a href="https://github.com/Supreme-Soft" class="icon-link github-icon" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-images"></i> Gallery</a>
+        <a href="#"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+    <div class="container">
+        <div class="image-container">
+            <img id="image" src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff" alt="Image">
+            <i class="fas fa-info-circle icon info-icon" onclick="toggleDetails()"></i>
+            <i class="fas fa-chevron-right icon next-icon" onclick="changeImage()"></i>
+        </div>
+        <div class="details-container">
+            <p class="details" id="imageDetails">Details about the image</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Image credits go to the <a class="footer-link" onclick="openCredit()">creators</a>, provided under
+                Creative Commons licenses.</p>
+
+            <div class="credits" style="display: none;">
+                <ul class="credit-links">
+                    <li>Photo by <a class="footer-link"
+                            href="https://unsplash.com/@daytripinanhour?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kevin
+                            Kenny</a> on <a class="footer-link"
+                            href="https://unsplash.com/photos/brown-wooden-bridge-over-blue-sea-under-blue-sky-during-daytime-i7tFB9IA0Bc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+                    </li>
+                    <li>Photo by <a class="footer-link"
+                            href="https://unsplash.com/@guernseyphotographer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Simon
+                            English</a> on <a class="footer-link"
+                            href="https://unsplash.com/photos/man-standing-on-top-of-mountain-beside-cairn-stones-48nerZQCHgo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+                    </li>
+                </ul>
+            </div>
+            <p>&copy; 2024 <a class="footer-link" href="https://supreme-soft.blogspot.com">Supreme Soft</a>. All Rights
+                Reserved.</a></p>
+        </div>
+    </footer>
+    <script>
+        function openCredit(event) {
+            var credits = document.querySelector('.credits');
+            if (credits.style.display === 'none') {
+                credits.style.display = 'block';
+            } else {
+                credits.style.display = 'none';
+            }
+            event.stopPropagation();
+        }
+
+        document.addEventListener('click', function (event) {
+            var credits = document.querySelector('.credits');
+            var link = document.querySelector('.footer-link');
+            var isCreditsClicked = credits.contains(event.target) || event.target === link;
+            if (!isCreditsClicked) {
+                credits.style.display = 'none';
+            }
+        });
+
+    </script>
+    <script>
+        const images = [
+            { url: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff", details: "Details about the First image" },
+            { url: "https://images.unsplash.com/photo-1624906608734-2915d775945a", details: "Details about the Second image" }
+        ];
+
+        let currentImageIndex = 0;
+        let isDetailsVisible = false;
+
+        function toggleDetails() {
+            const detailsContainer = document.querySelector('.details-container');
+            isDetailsVisible = !isDetailsVisible;
+            detailsContainer.style.display = isDetailsVisible ? 'block' : 'none';
+        }
+
+        function changeImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            const image = images[currentImageIndex];
+            document.getElementById('image').src = image.url;
+            document.getElementById('imageDetails').textContent = image.details;
+            if (isDetailsVisible) {
+                document.querySelector('.details-container').style.display = 'block';
+            }
+        }
+    </script>
+    <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            const menuToggler = document.getElementById('menuToggler');
+            const closeToggler = document.getElementById('closeToggler');
+            const navLinks = document.querySelectorAll('nav a');
+
+            if (window.innerWidth <= 768) {
+                if (isMenuOpen) {
+                    navLinks.forEach(link => link.style.display = 'none');
+                    menuToggler.style.display = 'block';
+                    closeToggler.style.display = 'none';
+                } else {
+                    navLinks.forEach(link => link.style.display = 'block');
+                    menuToggler.style.display = 'none';
+                    closeToggler.style.display = 'block';
+                }
+                isMenuOpen = !isMenuOpen;
+            }
+        }
+
+        window.addEventListener('resize', function () {
+            const menuToggler = document.getElementById('menuToggler');
+            const closeToggler = document.getElementById('closeToggler');
+            const navLinks = document.querySelectorAll('nav a');
+
+            if (window.innerWidth > 768) {
+                navLinks.forEach(link => link.style.display = 'block');
+                menuToggler.style.display = 'none';
+                closeToggler.style.display = 'none';
+                isMenuOpen = false;
+            }
+            else {
+                if (isMenuOpen) {
+                    navLinks.forEach(link => link.style.display = 'block');
+                    menuToggler.style.display = 'none';
+                    closeToggler.style.display = 'block';
+                } else {
+                    navLinks.forEach(link => link.style.display = 'none');
+                    menuToggler.style.display = 'block';
+                    closeToggler.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
